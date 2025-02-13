@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Amada</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('amor.jpeg');
+            background-size: auto;
+            background-position: top left;
+            background-repeat: repeat;
+            /* Faz a imagem se repetir na tela */
+            background-attachment: fixed;
+            /* Fixa a imagem ao rolar a página */
+            text-align: center;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: black;
+            font-size: 3em;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #f0f0f0;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #d45d5d;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            font-size: 1.3em;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background-color: #f28e8e;
+        }
+
+        .message {
+            display: none;
+            font-size: 1.3em;
+            color: black;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .gif-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .gif-container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1.1em;
+            }
+
+            .button {
+                font-size: 1.1em;
+                padding: 12px 24px;
+            }
+
+            .message {
+                font-size: 1.1em;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+            .message {
+                font-size: 1em;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Para Minha Namorada Incrível</h1>
+    <p id="introText">Eu só queria dizer o quanto você é especial para mim. Você é uma mulher incrível, cheia de luz e
+        amor.</p>
+
+    <button class="button" id="surpriseButton" onclick="revealMessage()">Clique aqui para uma surpresa</button>
+
+    <p class="message" id="specialMessage">
+        Eu te amo muito, e sou tão grato por ter você na minha vida. <br> Você é minha felicidade e minha inspiração
+        todos os dias! ❤️
+    </p>
+
+    <div class="gif-container" id="gifContainer">
+        <img src="https://media1.tenor.com/m/adDFClGqVRoAAAAd/good-morning.gif" alt="Coração Fofo">
+    </div>
+
+    <button class="button" onclick="resetPage()" id="backButton" style="display: none;">Voltar</button>
+
+    <script>
+        let moveCount = 0;
+
+        function revealMessage() {
+            var introText = document.getElementById("introText");
+            var message = document.getElementById("specialMessage");
+            var gifContainer = document.getElementById("gifContainer");
+            var button = document.getElementById("surpriseButton");
+            var backButton = document.getElementById("backButton");
+
+            // Remover a frase inicial
+            introText.style.display = "none";
+
+            // Revelar a mensagem e o GIF
+            message.style.display = "block";  // Exibe a mensagem
+            gifContainer.style.display = "block"; // Exibe o GIF
+
+            // Ocultar o botão "Clique aqui para uma surpresa"
+            button.style.display = "none";  // Oculta o botão
+
+            // Mostrar o botão de voltar
+            backButton.style.display = "block";
+        }
+
+        function resetPage() {
+            var introText = document.getElementById("introText");
+            var message = document.getElementById("specialMessage");
+            var gifContainer = document.getElementById("gifContainer");
+            var button = document.getElementById("surpriseButton");
+            var backButton = document.getElementById("backButton");
+
+            // Restaurar a página ao estado inicial
+            introText.style.display = "block";
+            message.style.display = "none";
+            gifContainer.style.display = "none";
+            button.style.display = "block";
+            backButton.style.display = "none";
+
+            // Reiniciar o contador de movimentos do botão
+            moveCount = 0;
+        }
+
+        // Movimentação do botão quando o cursor estiver em cima
+        document.getElementById("surpriseButton").addEventListener("mouseover", function () {
+            var button = document.getElementById("surpriseButton");
+
+            if (moveCount < 10) {  // O movimento acontece agora 10 vezes
+                moveCount++;
+
+                // Movimento simples do botão
+                button.style.position = "absolute"; // O botão se move
+                button.style.left = Math.random() * 80 + "%"; // Movimenta o botão de forma leve
+                button.style.top = Math.random() * 80 + "%";  // Movimenta o botão de forma leve
+            } else {
+                // Após 10 vezes, o botão fica fixo e pode ser clicado
+                button.style.position = "static";
+            }
+        });
+    </script>
+</body>
+
+</html>
